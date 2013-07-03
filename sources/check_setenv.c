@@ -1,11 +1,11 @@
 /*
-** check_setenv.c for sources in /tmp/minishell1-2017pso-dabbec_j/sources
+** check_setenv.c for sources in /Volumes/Jazalizil/Utilisateurs/jazalizil/msh2/sources
 ** 
 ** Made by jalil dabbech
 ** Login   <dabbec_j@epitech.net>
 ** 
 ** Started on  Fri Jun 07 17:45:27 2013 jalil dabbech
-** Last update Fri Jun 07 18:15:32 2013 jalil dabbech
+** Last update Jeu jul 04 01:06:19 2013 jalil dabbech
 */
 
 #include "mysh.h"

@@ -1,11 +1,11 @@
 /*
-** exec.c for sources in /home/dabbec_j/projets/minishell2/sources
+** exec.c for sources in /Volumes/Jazalizil/Utilisateurs/jazalizil/msh2/sources
 ** 
 ** Made by jalil dabbech
 ** Login   <dabbec_j@epitech.net>
 ** 
 ** Started on  Thu Jun 27 19:18:55 2013 jalil dabbech
-** Last update Mon Jul 01 19:02:24 2013 jalil dabbech
+** Last update Jeu jul 04 01:16:22 2013 jalil dabbech
 */
 
 #include <sys/types.h>
@@ -113,7 +113,6 @@ void	do_exec(char *cmd, t_env **my_env, char **env_tab)
     return ;
   if ((redirect = check_redirection(cmd)) == -1)
     return ;
-  
   if ((cmd_tab = check_cmd(cmd, my_env, env_tab)))
   {
     ps = fork();

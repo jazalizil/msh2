@@ -1,11 +1,11 @@
 /*
-** whereiscmd.c for sources in /home/dabbec_j/projets/minishell2/sources
+** whereiscmd.c for sources in /Volumes/Jazalizil/Utilisateurs/jazalizil/msh2/sources
 ** 
 ** Made by jalil dabbech
 ** Login   <dabbec_j@epitech.net>
 ** 
 ** Started on  Thu May 23 15:57:56 2013 jalil dabbech
-** Last update Thu Jun 27 18:49:15 2013 jalil dabbech
+** Last update Jeu jul 04 01:05:25 2013 jalil dabbech
 */
 
 #include <sys/types.h>
