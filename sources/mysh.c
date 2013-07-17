@@ -5,12 +5,10 @@
 ** Login   <dabbec_j@epitech.net>
 ** 
 ** Started on  Mon Jun 03 21:18:52 2013 jalil dabbech
-** Last update mer. juil. 17 06:41:43 2013 jalil dabbech
+** Last update mer. juil. 17 09:12:00 2013 jalil dabbech
 */
 
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include <stdlib.h>
 #include "mysh.h"
 #include "my.h"
@@ -74,23 +72,20 @@ void	do_sh(t_env **my_env, char **my_env_tab)
 {
   char	*cmd;
   char	**cmd_tab;
-  pid_t	ps;
+  t_cmd	*cmds;
 
+  cmds = NULL;
   env_tab = my_env_tab;
   while (!stop)
   {
     my_putstr("$> ");
     if ((cmd = get_next_line(0)))
     {
-      if ((cmd_tab = check_cmd(cmd, my_env, env_tab)))
+      multiple_cmd(&cmds, cmd);
+      while (cmds)
       {
-	ps = fork();
-	if (ps == 0)
-	  exec_cmd(cmd_tab, my_env);
-	else if (ps < 0)
-	  my_putstrerror("Error fork.\n", 3);
-	else
-	  wait(NULL);
+	my_fork(cmds->cmd, my_env, env_tab);
+	cmds = cmds->next;
       }
     }
     else

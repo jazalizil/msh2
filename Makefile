@@ -8,7 +8,9 @@ SRC	=	sources/builtins.c \
 		sources/manage_sig.c \
 		sources/my_list.c \
 		sources/mysh.c \
-		sources/whereiscmd.c
+		sources/whereiscmd.c \
+		sources/my_fork.c \
+		sources/multiple_cmd.c
 
 OBJ	=	$(SRC:.c=.o)
 
