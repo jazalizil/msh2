@@ -1,49 +1,47 @@
-##
-## Makefile for minishell2 in /home/dabbec_j/projets/minishell2
-## 
-## Made by jalil dabbech
-## Login   <dabbec_j@epitech.net>
-## 
-## Started on  Tue May 21 14:07:58 2013 jalil dabbech
-## Last update Mon Jul 01 17:40:27 2013 jalil dabbech
-##
+NAME	=	msh2
 
-NAME	=	mysh
-
-SRC	=	sources/get_next_line.c \
-		sources/main.c \
-		sources/my_list.c \
-		sources/my_malloc.c \
-		sources/my_puterror.c \
-		sources/my_putstr.c \
-		sources/my_str_to_wordtab.c \
-		sources/my_strcmp.c \
-		sources/mysh.c \
-		sources/whereiscmd.c \
-		sources/builtins.c \
-		sources/errors.c \
-		sources/manage_builtins.c \
-		sources/my_strndup.c \
-		sources/manage_sig.c \
+SRC	=	sources/builtins.c \
 		sources/check_setenv.c \
-		sources/my_strcat.c \
-		sources/exec.c
+		sources/errors.c \
+		sources/main.c \
+		sources/manage_builtins.c \
+		sources/manage_sig.c \
+		sources/my_list.c \
+		sources/mysh.c \
+		sources/whereiscmd.c
 
 OBJ	=	$(SRC:.c=.o)
 
-CC	=	gcc -W -Wall -Werror -pedantic -Wextra -Iincludes
+CC	=	gcc -Iincludes/
+
+CFLAGS	=	-W -Wall -Wextra -pedantic -ansi
+
+LIB_DIR	=	my
+
+MK_LIB	=	@(cd $(LIB_DIR) && make)
+
+MK_CLIB	=	@(cd $(LIB_DIR) && make clean)
+
+MK_FLIB	=	@(cd $(LIB_DIR) && make fclean)
+
+LIB	=	-L. -lmy
 
 RM	=	rm -f
 
-all:		$(NAME)
+all	:	$(NAME)
 
 $(NAME):	$(OBJ)
-		$(CC) -o $(NAME) $(OBJ)
+		$(MK_LIB)
+		$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIB)
 
-clean:
+clean	:
 		$(RM) $(OBJ)
+		$(MK_CLIB)
 
-fclean:		clean
+fclean	:	clean
 		$(RM) $(NAME)
+		$(MK_FLIB)
 
-re:		fclean all
+re	:	fclean all
+
+.PHONY	:	all clean fclean re

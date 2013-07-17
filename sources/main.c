@@ -1,17 +1,18 @@
 /*
-** main.c for sources in /home/dabbec_j/projets/minishell2/sources
+** main.c for sources in /share/projets/sysunix/msh2/sources
 ** 
 ** Made by jalil dabbech
 ** Login   <dabbec_j@epitech.net>
 ** 
 ** Started on  Thu May 23 14:21:30 2013 jalil dabbech
-** Last update Mon Jul 01 19:00:03 2013 jalil dabbech
+** Last update mer. juil. 17 06:40:36 2013 jalil dabbech
 */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <signal.h>
 #include "mysh.h"
+#include "my.h"
 
 int	my_conv_env(t_env **my_env, char **envp)
 {

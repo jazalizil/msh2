@@ -1,8 +1,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include "get_next_line.h"
 
-char		*get_next_line(int);
 
 int		main()
 {

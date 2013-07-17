@@ -1,16 +1,17 @@
 /*
-** builtins.c for sources in /home/dabbec_j/projets/minishell2/sources
+** builtins.c for sources in /share/projets/sysunix/msh2/sources
 ** 
 ** Made by jalil dabbech
 ** Login   <dabbec_j@epitech.net>
 ** 
 ** Started on  Sat May 25 17:07:45 2013 jalil dabbech
-** Last update Thu Jun 27 18:18:36 2013 jalil dabbech
+** Last update mer. juil. 17 06:39:48 2013 jalil dabbech
 */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "mysh.h"
+#include "my.h"
 
 int	do_cd(char **cmd, t_env **my_env)
 {

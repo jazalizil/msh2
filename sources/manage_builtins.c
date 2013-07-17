@@ -1,17 +1,17 @@
 /*
-** manage_builtins.c for sources in /Volumes/Jazalizil/Utilisateurs/jazalizil/msh2/sources
+** manage_builtins.c for sources in /share/projets/sysunix/msh2/sources
 ** 
 ** Made by jalil dabbech
 ** Login   <dabbec_j@epitech.net>
 ** 
 ** Started on  Thu May 30 18:51:00 2013 jalil dabbech
-** Last update Jeu jul 04 01:16:21 2013 jalil dabbech
+** Last update mer. juil. 17 06:40:58 2013 jalil dabbech
 */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include "mysh.h"
+#include "my.h"
 
 t_builtins	g_builtins[] =
 {
@@ -46,17 +46,6 @@ char	**check_cmd(char *cmd, t_env **my_env, char **env_tab)
   cmd_tab = my_str_to_wordtab(cmd);
   free(cmd);
   size = 0;
-  while (cmd_tab[size])
-  {
-    if (cmd_tab[size][0] == '|')
-      printf("pipe !\n");
-    else if (cmd_tab[size][0] == ';')
-      printf("and !\n");
-    else
-      printf("%s\n", cmd_tab[size]);
-    size++;
-  }
-  exit(0);
   if ((bi = is_a_builtin(cmd_tab[0])) >= 0)
   {
     ret = g_builtins[bi].fct(cmd_tab, my_env);

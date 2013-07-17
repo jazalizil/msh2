@@ -1,11 +1,11 @@
 /*
-** mysh.c for sources in /Volumes/Jazalizil/Utilisateurs/jazalizil/msh2/sources
+** mysh.c for sources in /share/projets/sysunix/msh2/sources
 ** 
 ** Made by jalil dabbech
 ** Login   <dabbec_j@epitech.net>
 ** 
 ** Started on  Mon Jun 03 21:18:52 2013 jalil dabbech
-** Last update Jeu jul 04 01:05:49 2013 jalil dabbech
+** Last update mer. juil. 17 06:41:43 2013 jalil dabbech
 */
 
 #include <unistd.h>
@@ -13,10 +13,47 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include "mysh.h"
+#include "my.h"
 #include "get_next_line.h"
 
 static int	stop;
 static char	**env_tab;
+
+char	**assign_args(char **cmd_tab)
+{
+  int	i;
+  char	**ret;
+
+  i = 0;
+  while (cmd_tab[i])
+    i++;
+  ret = my_wordtabmalloc(i, "assign_args. \n");
+  i = 0;
+  while (cmd_tab[i])
+  {
+    ret[i] = my_strdup(cmd_tab[i]);
+    i++;
+  }
+  ret[i] = NULL;
+  return (ret);
+}
+
+void	exec_cmd(char **cmd_tab, t_env **my_env)
+{
+  char	**arg;
+
+  arg = assign_args(cmd_tab);
+  if (execve(cmd_tab[0], arg, env_tab) == -1)
+  {
+    cmd_tab[0] = where_is_cmd(cmd_tab[0], my_env);
+    arg = assign_args(cmd_tab);
+    if ((execve(cmd_tab[0], arg, env_tab)) == -1)
+      check_error(cmd_tab, arg);
+  }
+  my_free_wordtab(arg, my_wordtab_size(arg));
+  my_free_wordtab(cmd_tab, my_wordtab_size(cmd_tab));
+  exit(EXIT_SUCCESS);
+}
 
 void	stop_the_shell(t_env **my_env, int eof_or_exit)
 {
@@ -36,14 +73,26 @@ void	set_env_tab(t_env **env, int size)
 void	do_sh(t_env **my_env, char **my_env_tab)
 {
   char	*cmd;
+  char	**cmd_tab;
+  pid_t	ps;
 
   env_tab = my_env_tab;
   while (!stop)
   {
     my_putstr("$> ");
-    cmd = NULL;
     if ((cmd = get_next_line(0)))
-      do_exec(cmd, my_env, env_tab);
+    {
+      if ((cmd_tab = check_cmd(cmd, my_env, env_tab)))
+      {
+	ps = fork();
+	if (ps == 0)
+	  exec_cmd(cmd_tab, my_env);
+	else if (ps < 0)
+	  my_putstrerror("Error fork.\n", 3);
+	else
+	  wait(NULL);
+      }
+    }
     else
       stop_the_shell(my_env, 1);
   }

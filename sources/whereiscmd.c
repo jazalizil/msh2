@@ -1,11 +1,11 @@
 /*
-** whereiscmd.c for sources in /Volumes/Jazalizil/Utilisateurs/jazalizil/msh2/sources
+** whereiscmd.c for sources in /share/projets/sysunix/msh2/sources
 ** 
 ** Made by jalil dabbech
 ** Login   <dabbec_j@epitech.net>
 ** 
 ** Started on  Thu May 23 15:57:56 2013 jalil dabbech
-** Last update Jeu jul 04 01:05:25 2013 jalil dabbech
+** Last update mer. juil. 17 06:42:00 2013 jalil dabbech
 */
 
 #include <sys/types.h>
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "mysh.h"
+#include "my.h"
 
 int	how_many_rep(char *path)
 {
@@ -88,8 +89,7 @@ char	*my_concat(char *str1, char *str2, char separator)
   int	j;
 
   size = my_strlen(str1) + my_strlen(str2) + 2;
-  if (!(ret = my_malloc(size, "my_concat.\n")))
-    return (NULL);
+  ret = my_malloc(size, "my_concat.\n");
   i = 0;
   while (str1[i])
   {
@@ -128,5 +128,6 @@ char	*where_is_cmd(char *cmd, t_env **my_env)
     write(2, "\n", 1);
     exit(EXIT_FAILURE);
   }
-  return (my_concat(path, cmd, '/'));
+  path = my_concat(path, cmd, '/');
+  return (path);
 }

@@ -1,16 +1,17 @@
 /*
-** errors.c for sources in /home/dabbec_j/projets/minishell2/sources
+** errors.c for sources in /share/projets/sysunix/msh2/sources
 ** 
 ** Made by jalil dabbech
 ** Login   <dabbec_j@epitech.net>
 ** 
 ** Started on  Mon May 27 15:33:07 2013 jalil dabbech
-** Last update Thu Jun 27 18:18:13 2013 jalil dabbech
+** Last update mer. juil. 17 06:42:24 2013 jalil dabbech
 */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "mysh.h"
+#include "my.h"
 
 void	check_error(char **cmd, char **arg)
 {

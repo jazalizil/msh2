@@ -1,11 +1,10 @@
 #include <unistd.h>
+#include "get_next_line.h"
 
-int	main()
+int		main()
 {
-  int	fild[2];
-  int	pid;
-  char	buff[512];
-  int	len;
+  static int	fild[2];
+  int		pid;
 
   if (pipe(fild) == -1)
     return (-1);
@@ -15,15 +14,13 @@ int	main()
   {
     close(fild[0]);
     dup2(fild[1], 1);
-    write(1, "salut depuis fild0\n", 19);
+    execlp("/bin/ls", "ls", 0);
   }
   else
   {
     close(fild[1]);
-    len = read(fild[0], buff, 511);
-    buff[len] = 0;
-    write(1, "J'ai lu: ", 9);
-    write(1, buff, len);
+    dup2(fild[0], 0);
+    execlp("/bin/more", "most", 0);
   }
   return (0);
 }
